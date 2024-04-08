@@ -7,8 +7,9 @@ const Login = () => {
       style={{
         height: "380px",
         width: "310px",
-        background: "linear-gradient(rgb(0, 0, 0) 20%, rgb(22, 59, 143) 130%)",
+        backgroundColor: "rgba(111, 111, 111, 0.4)",
         borderRadius: "20px",
+        backdropFilter: "blur(10px)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
