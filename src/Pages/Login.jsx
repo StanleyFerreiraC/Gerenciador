@@ -1,33 +1,39 @@
 import React from "react";
+import logo from "../assets/logolight.png";
 
 const Login = () => {
   return (
     <div
       style={{
-        height: "407px",
-        width: "356px",
-        backgroundColor: "#24225C",
+        height: "380px",
+        width: "310px",
+        background: "linear-gradient(rgb(0, 0, 0) 20%, rgb(22, 59, 143) 130%)",
         borderRadius: "20px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
     >
-      <h2>Login</h2>
+      <img
+        style={{
+          width: "6em",
+          padding: "30px"
+        }}
+        src={logo}
+      ></img>
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           width: "80%",
-          textAlign: 'left'
+          textAlign: "left",
         }}
       >
-        <h3>Usuario:</h3>
-        <input type="text"></input>
-        <h3>Senha:</h3>
-        <input type="password"></input>
+        <input type="text" placeholder="Usuario"></input>
+        <input placeholder="Senha" type="password"></input>
       </div>
-      <h3>Esqueceu sua senha ?</h3>
+      <h3 className="forgot">Esqueceu sua senha ?</h3>
+      <button>Login</button>
     </div>
   );
 };
