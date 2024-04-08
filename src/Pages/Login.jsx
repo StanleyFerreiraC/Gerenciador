@@ -28,6 +28,7 @@ const Login = () => {
         <input type="password"></input>
       </div>
       <h3>Esqueceu sua senha ?</h3>
+      <button>LOGIN</button>
     </div>
   );
 };

@@ -25,16 +25,18 @@ a:hover {
 input {
   background-color: #d9d9d99f;
   border: none;
+  color: #1a1a1a;
   height: 30px;
   margin-bottom: 10px;
   border-radius: 10px;
+  font-size: 16px;
+  padding-left: 20px;
+  font-weight: bold;
 }
 
 input:focus {
   outline: none; /* Remover a borda padrão do navegador */
 }
-
-
 
 body {
   margin: 0;
@@ -55,22 +57,23 @@ h3 {
   line-height: 0;
 }
 
-
-
 button {
+  margin-top: 20px;
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: none;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #d9d9d99f;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: #ffffff;
+  color: #24225C;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
