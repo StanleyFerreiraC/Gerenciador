@@ -13,6 +13,7 @@ const Login = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        boxShadow: "0px 0px 5px 1px rgba(255, 255, 255, 0.5)",
       }}
     >
       <img
