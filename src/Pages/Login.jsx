@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/logolight.png";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validar campos de entrada
+    if (!username.trim() || !password.trim()) {
+      setError("Por favor, preencha todos os campos");
+      return;
+    }
+  };
+
   return (
     <div
       style={{
@@ -19,7 +33,7 @@ const Login = () => {
       <img
         style={{
           width: "6em",
-          padding: "30px"
+          padding: "30px",
         }}
         src={logo}
       ></img>
@@ -31,8 +45,8 @@ const Login = () => {
           textAlign: "left",
         }}
       >
-        <input type="text" placeholder="Usuario"></input>
-        <input placeholder="Senha" type="password"></input>
+        <input type="text" value={username} placeholder="Usuario"></input>
+        <input type="password" value={password} placeholder="Senha"></input>
       </div>
       <h3 className="forgot">Esqueceu sua senha ?</h3>
       <button>Login</button>
