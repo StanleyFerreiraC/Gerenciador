@@ -34,7 +34,8 @@ const Login = () => {
         <input type="text" placeholder="Usuario"></input>
         <input placeholder="Senha" type="password"></input>
       </div>
-      <h3>Esqueceu sua senha ?</h3>
+      <h3 className="forgot">Esqueceu sua senha ?</h3>
+      <button>Login</button>
     </div>
   );
 };
