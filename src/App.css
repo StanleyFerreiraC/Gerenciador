@@ -5,6 +5,19 @@
   text-align: center;
 }
 
+.add {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: #8c28a0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  
+}
+
+.add:hover{
+  transform: scale(1.2);
+}
 
 .logo {
   height: 6em;
