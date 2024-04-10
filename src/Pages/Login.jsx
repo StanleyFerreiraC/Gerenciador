@@ -21,6 +21,11 @@ const Login = () => {
     e.preventDefault();
     console.log(username, password);
 
+    if (!username.trim() || !password.trim()) {
+      setError("Por favor, preencha todos os campos");
+      return;
+    }
+
     try {
       const response = await axios.post(
       "http://localhost:3000/login",
@@ -42,7 +47,6 @@ const Login = () => {
   return (
     <div
       style={{
-        height: "380px",
         width: "310px",
         backgroundColor: "rgba(111, 111, 111, 0.4)",
         borderRadius: "20px",
@@ -66,6 +70,10 @@ const Login = () => {
           alignItems: "center",
         }}
       >
+        <p style={{
+            color: "red",
+            margin: "0px 0px 10px 0px"
+          }}>{error}</p>
         <div
           style={{
             display: "flex",
@@ -77,18 +85,19 @@ const Login = () => {
           <input
             type="text"
             name="username"
-            value={username}
             placeholder="Username"
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
           ></input>
           <input
             type="password"
             name="password"
-            value={password}
             placeholder="Password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
+        
         <h3 className="forgot">Forgot your password ?</h3>
         <button onClick={(e) => handlerLogin(e)}>Login</button>
       </form>
