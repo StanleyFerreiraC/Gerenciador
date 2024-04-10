@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/logolight.png";
+import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -16,6 +17,28 @@ const Login = () => {
     }
   };
 
+  const handlerLogin = async (e) => {
+    e.preventDefault();
+    console.log(username, password);
+
+    try {
+      const response = await axios.post(
+      "http://localhost:3000/login",
+      JSON.stringify({ username, password }),
+      {
+        headers: { 'Content-Type' : 'application/json'}
+      }
+    );
+  } catch (error) {
+    if (!error?.response) {
+      setError('Error accessing the server')
+    } else if (error.response.status == 401) {
+      setError('Incorrect username or password')
+    }
+  }
+
+  };
+
   return (
     <div
       style={{
@@ -24,9 +47,6 @@ const Login = () => {
         backgroundColor: "rgba(111, 111, 111, 0.4)",
         borderRadius: "20px",
         backdropFilter: "blur(10px)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
         boxShadow: "0px 0px 5px 1px rgba(255, 255, 255, 0.5)",
       }}
     >
@@ -37,19 +57,41 @@ const Login = () => {
         }}
         src={logo}
       ></img>
-      <div
+      <form
+        onSubmit={handleSubmit}
         style={{
+          width: "100%",
           display: "flex",
           flexDirection: "column",
-          width: "80%",
-          textAlign: "left",
+          alignItems: "center",
         }}
       >
-        <input type="text" value={username} placeholder="Usuario"></input>
-        <input type="password" value={password} placeholder="Senha"></input>
-      </div>
-      <h3 className="forgot">Esqueceu sua senha ?</h3>
-      <button>Login</button>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "80%",
+            textAlign: "left",
+          }}
+        >
+          <input
+            type="text"
+            name="username"
+            value={username}
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+        </div>
+        <h3 className="forgot">Forgot your password ?</h3>
+        <button onClick={(e) => handlerLogin(e)}>Login</button>
+      </form>
     </div>
   );
 };
