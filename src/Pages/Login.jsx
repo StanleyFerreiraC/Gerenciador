@@ -1,47 +1,42 @@
 import React, { useState } from "react";
 import logo from "../assets/logolight.png";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Validar campos de entrada
-    if (!username.trim() || !password.trim()) {
-      setError("Por favor, preencha todos os campos");
-      return;
-    }
-  };
+  const navigate = useNavigate();
 
   const handlerLogin = async (e) => {
     e.preventDefault();
     console.log(username, password);
 
+    //Se o campo estiver vazio mostre a mensagem
     if (!username.trim() || !password.trim()) {
-      setError("Por favor, preencha todos os campos");
+      setError("Please fill in all fields");
       return;
     }
 
     try {
       const response = await axios.post(
-      "http://localhost:3000/login",
-      JSON.stringify({ username, password }),
-      {
-        headers: { 'Content-Type' : 'application/json'}
+        "http://localhost:3000/login",
+        JSON.stringify({ username, password }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response.status === 200) {
+        navigate("/home");
       }
-    );
-  } catch (error) {
-    if (!error?.response) {
-      setError('Error accessing the server')
-    } else if (error.response.status == 401) {
-      setError('Incorrect username or password')
+    } catch (error) {
+      if (!error?.response) {
+        setError("Error accessing the server");
+      } else if (error.response.status == 401) {
+        setError("Incorrect username or password");
+      }
     }
-  }
-
   };
 
   return (
@@ -62,7 +57,7 @@ const Login = () => {
         src={logo}
       ></img>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handlerLogin}
         style={{
           width: "100%",
           display: "flex",
@@ -70,10 +65,14 @@ const Login = () => {
           alignItems: "center",
         }}
       >
-        <p style={{
+        <p
+          style={{
             color: "red",
-            margin: "0px 0px 10px 0px"
-          }}>{error}</p>
+            margin: "0px 0px 10px 0px",
+          }}
+        >
+          {error}
+        </p>
         <div
           style={{
             display: "flex",
@@ -97,9 +96,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
-        
+
         <h3 className="forgot">Forgot your password ?</h3>
-        <button onClick={(e) => handlerLogin(e)}>Login</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
