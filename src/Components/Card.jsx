@@ -4,7 +4,7 @@ const Card = () => {
   return (
     <div
       style={{
-        minHeight: "100px",
+        height: "85px",
         minWidth: "450px",
         borderRadius: "20px",
         backgroundColor: "#8c28a0",
@@ -15,21 +15,20 @@ const Card = () => {
       <div
         style={{
           minWidth: "85%",
-          
         }}
       >
         <p
           style={{
             fontSize: "30px",
             textAlign: "left",
-            paddingLeft: "30px"
+            paddingLeft: "30px",
           }}
         >
           PROJETO
         </p>
       </div>
-      <span class="material-symbols-outlined">more_vert</span>
-      <span class="material-symbols-outlined">delete</span>
+      <span className="material-symbols-outlined">more_vert</span>
+      <span className="material-symbols-outlined">archive</span>
     </div>
   );
 };

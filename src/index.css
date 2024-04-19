@@ -80,6 +80,14 @@ button:hover {
   color: #1a1a1a;
 }
 
+.material-symbols-outlined {
+  cursor: pointer;
+}
+.material-symbols-outlined:hover {
+  transition: 0.1s;
+  scale: 1.1;
+}
+
 @media (prefers-color-scheme: light) /* Personalização do modo light */ {
   :root {
     background-color: #ffffff;

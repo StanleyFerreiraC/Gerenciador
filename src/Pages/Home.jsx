@@ -2,9 +2,11 @@ import React from "react";
 import Add from "../assets/add.svg";
 import "../App.css";
 import Card from "../Components/Card";
+import CreateCard from "../Components/CreateCard";
 
 const Home = () => {
   return (
+    
     <div
       style={{
         display: "flex",
@@ -13,7 +15,8 @@ const Home = () => {
         fontWeight: "bold",
       }}
     >
-      <Card></Card>
+      <Card/>
+      <CreateCard/>
       <div
         className="add"
         style={{
@@ -24,6 +27,7 @@ const Home = () => {
           marginTop: "15px",
         }}
       >
+        
         <ion-icon
           style={{
             height: "40px",
