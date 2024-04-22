@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/logolight.png";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");

@@ -16,18 +16,81 @@ const CreateCard = () => {
         zIndex: "1",
       }}
     >
-      <div
+      {/* Campo do formulario */}
+      <form
         style={{
           height: "70%",
-          minWidth: "30%",
-          borderRadius: "20px",
+          width: "30%",
+          borderRadius: "10px",
           backgroundColor: "#4f145b",
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
         }}
       >
-        CreateCard
-      </div>
+        {/* Drop de imagem */}
+        <div
+          style={{
+            height: "40%",
+            width: "80%",
+            backgroundColor: "#c5bdbd4d",
+            borderRadius: "10px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <span
+            style={{
+              scale: "1.2",
+            }}
+            class="material-symbols-outlined"
+          >
+            place_item
+          </span>
+        </div>
+        {/*Inputs*/}
+        <input
+          style={{
+            marginTop: "30px",
+            width: "76%",
+            borderRadius: "10px",
+          }}
+          name="projectname"
+          type="text"
+          placeholder="Project name"
+        />
+        <div
+          style={{
+            width: "80%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row"
+          }}
+        >
+          <input
+            style={{
+              borderRadius: "10px",
+              marginRight:"10px",
+              width: "50%"
+            }}
+            name="data de inicio"
+            type="date"
+            placeholder="Start Date"
+          />
+          <input
+            style={{
+              borderRadius: "10px",
+              width: "50%"
+            }}
+            name="data de Finalização"
+            type="date"
+            placeholder="Completion date"
+          />
+        </div>
+      </form>
     </div>
   );
 };
