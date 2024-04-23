@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../assets/logolight.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -45,7 +46,7 @@ const Login = () => {
         backgroundColor: "rgba(111, 111, 111, 0.4)",
         borderRadius: "20px",
         backdropFilter: "blur(10px)",
-        boxShadow: "0px 0px 5px 1px rgba(255, 255, 255, 0.5)",
+        boxShadow: "0px 0px 5px 1px #0202028a",
       }}
     >
       <img

@@ -4,10 +4,10 @@ const Card = () => {
   return (
     <div
       style={{
-        height: "85px",
-        minWidth: "450px",
+        height: "100%",
+        minWidth: "180%",
         borderRadius: "20px",
-        backgroundColor: "#8c28a0",
+        backgroundColor: "#adadade8",
         display: "flex",
         alignItems: "center",
       }}

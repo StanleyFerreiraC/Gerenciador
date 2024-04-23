@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreateCard = () => {
+const CreateCard = ({toggleVisibility}) => {
   return (
     <div
       style={{
@@ -17,23 +17,25 @@ const CreateCard = () => {
       }}
     >
       {/* Campo do formulario */}
-      <form
+      <div
         style={{
-          height: "70%",
-          width: "30%",
+          height: "60%",
+          minWidth: "25%",
+          padding: "0px 20px",
           borderRadius: "10px",
-          backgroundColor: "#4f145b",
+          backgroundColor: "rgba(111, 111, 111, 0.4)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
+          boxShadow: "0px 0px 5px 1px rgba(30 29 29)",
         }}
       >
         {/* Drop de imagem */}
         <div
           style={{
-            height: "40%",
-            width: "80%",
+            height: "45%",
+            width: "100%",
             backgroundColor: "#c5bdbd4d",
             borderRadius: "10px",
             display: "flex",
@@ -51,10 +53,11 @@ const CreateCard = () => {
           </span>
         </div>
         {/*Inputs*/}
+
         <input
           style={{
             marginTop: "30px",
-            width: "76%",
+            width: "95%",
             borderRadius: "10px",
           }}
           name="projectname"
@@ -63,18 +66,19 @@ const CreateCard = () => {
         />
         <div
           style={{
-            width: "80%",
+            width: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            flexDirection: "row"
+            flexDirection: "row",
           }}
         >
           <input
             style={{
               borderRadius: "10px",
-              marginRight:"10px",
-              width: "50%"
+              marginRight: "5px",
+              width: "50%",
+              color: "#1f1e1ebb;",
             }}
             name="data de inicio"
             type="date"
@@ -83,14 +87,19 @@ const CreateCard = () => {
           <input
             style={{
               borderRadius: "10px",
-              width: "50%"
+              width: "50%",
+              color: "#1f1e1ebb;",
             }}
             name="data de Finalização"
             type="date"
             placeholder="Completion date"
           />
         </div>
-      </form>
+        <div>
+          <button>Save</button>
+          <button onClick={toggleVisibility}>Cancel</button>
+        </div>
+      </div>
     </div>
   );
 };

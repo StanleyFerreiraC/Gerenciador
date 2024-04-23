@@ -1,41 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import Add from "../assets/add.svg";
 import "../App.css";
 import Card from "../Components/Card";
 import CreateCard from "../Components/CreateCard";
 
 const Home = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
-    
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        fontWeight: "bold",
-      }}
-    >
-      <Card/>
-      <CreateCard/>
-      <div
-        className="add"
-        style={{
-          height: "40px",
-          width: "40px",
-          borderRadius: "20px",
-          backgroundColor: "#8c28a0",
-          marginTop: "15px",
-        }}
-      >
-        
-        <ion-icon
+    <div>
+      {!isVisible && (
+        <div
           style={{
-            height: "40px",
-            width: "40px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            fontWeight: "bold",
+            height: "100%",
           }}
-          name="add-outline"
-        ></ion-icon>
-      </div>
+        >
+          <Card />
+          <div
+            className="add"
+            style={{
+              height: "40px",
+              width: "40px",
+              borderRadius: "20px",
+              backgroundColor: "#adadade8",
+              marginTop: "15px",
+            }}
+            onClick={toggleVisibility}
+          >
+            <ion-icon
+              style={{
+                height: "40px",
+                width: "40px",
+              }}
+              name="add-outline"
+            ></ion-icon>
+          </div>
+        </div>
+      )}
+      {isVisible && <CreateCard toggleVisibility={toggleVisibility} />}
     </div>
   );
 };
