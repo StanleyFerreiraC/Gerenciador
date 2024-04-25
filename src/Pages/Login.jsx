@@ -1,20 +1,43 @@
 import React, { useState } from "react";
-import logo from "../assets/logolight.png";
+import "../style/Login.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import Oig from "../assets/img/OIG.svg";
+
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
 
 const Login = () => {
+  const [posicao, setPosicao] = useState(36.5);
+  const [displaySing, setDisplaySing] = useState("none");
+  const [displayLogin, setDisplayLogin] = useState("flex");
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  //Move o card de login
+  const moverDivleft = () => {
+    setPosicao(49.9); // Mover a div 100px para a direita
+    setDisplaySing("flex");
+    setDisplayLogin("none");
+  };
+
+  const moverDivRight = () => {
+    setPosicao(36.5); // Mover a div 100px para a direita
+    setDisplaySing("none");
+    setDisplayLogin("flex");
+  };
+
+  //Função de autenticação Login
   const handlerLogin = async (e) => {
     e.preventDefault();
-    console.log(username, password);
+    console.log(email, password);
 
     //Se o campo estiver vazio mostre a mensagem
-    if (!username.trim() || !password.trim()) {
+    if (!email.trim() || !password.trim()) {
       setError("Please fill in all fields");
       return;
     }
@@ -22,7 +45,7 @@ const Login = () => {
     try {
       const response = await axios.post(
         "http://localhost:3000/login",
-        JSON.stringify({ username, password }),
+        JSON.stringify({ email, password }),
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -32,75 +55,255 @@ const Login = () => {
       }
     } catch (error) {
       if (!error?.response) {
-        setError("Error accessing the server");
+        setError("Erro ao acessar o servidor");
       } else if (error.response.status == 401) {
-        setError("Incorrect username or password");
+        setError("Usuário ou senha incorretos");
+      }
+    }
+  };
+
+  const handlerCadastro = async (e) => {
+    e.preventDefault();
+    console.log(email, password);
+
+    //Se o campo estiver vazio mostre a mensagem
+    if (!email.trim() || !password.trim()) {
+      setError("Por favor, preencha todos os campos");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/Cadastro",
+        JSON.stringify({ username, email, password }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response.status === 200) {
+        moverDivRight();
+      }
+    } catch (error) {
+      if (!error?.response) {
+        moverDivRight();
+        setError("Erro ao acessar o servidor");
       }
     }
   };
 
   return (
-    <div
-      style={{
-        width: "310px",
-        backgroundColor: "rgba(111, 111, 111, 0.4)",
-        borderRadius: "20px",
-        backdropFilter: "blur(10px)",
-        boxShadow: "0px 0px 5px 1px #0202028a",
+    <Container
+      maxWidth="xl"
+      sx={{
+        height: "100vh",
+        width: "50%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <img
-        style={{
-          width: "6em",
-          padding: "30px",
+      <Box
+        gap={1}
+        sx={{
+          display: "flex",
+          width: "60%",
+          alignItems: "center",
+          backgroundColor: "#ffffff",
+          borderRadius: "10px",
+          padding: "10px 20px 10px 20px",
+          color: "black",
+          height: "28%",
         }}
-        src={logo}
-      ></img>
-      <form
-        onSubmit={handlerLogin}
-        style={{
-          width: "100%",
+      >
+        <Box
+          gap={1}
+          className="cadastro visibility"
+          sx={{
+            display: `flex`,
+            flexDirection: "column",
+            alignItems: "center",
+            width: "50%",
+          }}
+        >
+          <a style={{ color: `black` }}>Ainda não tem uma conta ?</a>
+          <a style={{ color: `black` }}>
+            Cadastre-se e crie listas para <br /> organizar sua rotina
+          </a>
+          <Button
+            className="entrar"
+            onClick={moverDivleft}
+            variant="contained"
+            sx={{
+              boxShadow: "none",
+              backgroundColor: "#cb4204",
+              marginTop: "20px",
+              width: "53%",
+            }}
+          >
+            Cadastre-se
+          </Button>
+        </Box>
+
+        <Box
+          gap={1}
+          className="login visibility"
+          sx={{
+            display: `flex`,
+            flexDirection: "column",
+            alignItems: "center",
+            width: "50%",
+          }}
+        >
+          <a style={{ color: `black` }}>Ja tem cadastro ?</a>
+
+          <a style={{ color: `black` }}>
+            Então entre na sua conta <br /> e veja sua lista de tarefa
+          </a>
+          <Button
+            className="entrar"
+            onClick={moverDivRight}
+            variant="contained"
+            sx={{
+              boxShadow: "none",
+              backgroundColor: "#cb4204",
+              marginTop: "20px",
+              width: "50%",
+            }}
+          >
+            entrar
+          </Button>
+        </Box>
+      </Box>
+      <Box></Box>
+      <Box
+        sx={{
+          zIndex: "10",
+          position: "absolute",
+          right: `${posicao}%`,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          backgroundColor: "#b91814",
+          borderRadius: "10px",
+          padding: "10px 10px 20px 10px",
+          boxShadow: "0px 0px 10px 0px #000000",
+          transition: "right .8s ease-in-out",
+          height: "32%",
         }}
+        noValidate
+        autoComplete="off"
       >
-        <p
-          style={{
-            color: "red",
-            margin: "0px 0px 10px 0px",
-          }}
-        >
-          {error}
-        </p>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "80%",
-            textAlign: "left",
-          }}
-        >
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          ></input>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-        </div>
+        {/******Logo******/}
+        <img style={{ height: "70px", width: "60px", scale:"1.5" }} src={Oig} />
+        <strong className="erro">{error}</strong>
 
-        <h3 className="forgot">Forgot your password ?</h3>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+        {/******Login******/}
+        <Box
+          component="form"
+          className="login visibilityLogin"
+          sx={{
+            "& > :not(style)": { m: 1 },
+            display: `${displayLogin}`,
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <TextField
+            className="input"
+            type="email"
+            label="E-mail"
+            variant="outlined"
+            size="small"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+
+            className="input"
+            label="Senha"
+            variant="outlined"
+            type="password"
+            size="small"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <a className="a" style={{ fontSize: "13px", margin: "none" }}>
+              Esqueceu sua senha ?
+            </a>
+          </Box>
+          <Button
+            className="entrar"
+            variant="contained"
+            onClick={(e) => handlerLogin(e)}
+            sx={{
+              boxShadow: "none",
+              width: "100px",
+              backgroundColor: "#fefefe",
+              color: "#cb4204",
+            }}
+          >
+            entrar
+          </Button>
+        </Box>
+
+        {/******Cadastro de usuarios******/}
+        <Box
+          component="form"
+          className="cadastro visibility"
+          sx={{
+            "& > :not(style)": { m: 1 },
+            display: `${displaySing}`,
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <TextField
+            className="input"
+            name="Usuario"
+            label="Usuario"
+            variant="outlined"
+            type="text"
+            size="small"
+            sx={{ color: "white", borderColor: "white" }}
+          />
+          <TextField
+
+            className="input"
+            name="email"
+            label="E-mail"
+            variant="outlined"
+            type="email"
+            size="small"
+          />
+          <TextField
+
+            className="input"
+            label="Senha"
+            variant="outlined"
+            type="password"
+            size="small"
+          />
+          <Button
+            className="entrar"
+            variant="contained"
+            onClick={(e) => handlerCadastro(e)}
+            sx={{
+              boxShadow: "none",
+              width: "100px",
+              backgroundColor: "#fefefe",
+              color: "#cb4204",
+            }}
+          >
+            Cadastrar
+          </Button>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
