@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../style/Login.css";
 import { useNavigate } from "react-router-dom";
 import Oig from "../assets/img/OIG.svg";
+import axios from "axios";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -23,12 +24,14 @@ const Login = () => {
     setPosicao(49.9); // Mover a div 100px para a direita
     setDisplaySing("flex");
     setDisplayLogin("none");
+    setError(null);
   };
 
   const moverDivRight = () => {
     setPosicao(36.5); // Mover a div 100px para a direita
     setDisplaySing("none");
     setDisplayLogin("flex");
+    setError(null);
   };
 
   //Função de autenticação Login
@@ -38,7 +41,7 @@ const Login = () => {
 
     //Se o campo estiver vazio mostre a mensagem
     if (!email.trim() || !password.trim()) {
-      setError("Please fill in all fields");
+      setError("Preencha todos os campos");
       return;
     }
 
@@ -68,7 +71,7 @@ const Login = () => {
 
     //Se o campo estiver vazio mostre a mensagem
     if (!email.trim() || !password.trim()) {
-      setError("Por favor, preencha todos os campos");
+      setError("Preencha todos os campos");
       return;
     }
 
@@ -108,6 +111,7 @@ const Login = () => {
           display: "flex",
           width: "60%",
           alignItems: "center",
+          boxShadow: "0px 0px 10px 0px #000000",
           backgroundColor: "#ffffff",
           borderRadius: "10px",
           padding: "10px 20px 10px 20px",
@@ -194,13 +198,17 @@ const Login = () => {
         autoComplete="off"
       >
         {/******Logo******/}
-        <img style={{ height: "70px", width: "60px", scale:"1.5" }} src={Oig} />
+        <img
+          style={{ height: "70px", width: "60px", scale: "1.5" }}
+          src={Oig}
+        />
         <strong className="erro">{error}</strong>
 
         {/******Login******/}
         <Box
           component="form"
           className="login visibilityLogin"
+          onSubmit={handlerLogin}
           sx={{
             "& > :not(style)": { m: 1 },
             display: `${displayLogin}`,
@@ -214,15 +222,16 @@ const Login = () => {
             label="E-mail"
             variant="outlined"
             size="small"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
-
             className="input"
             label="Senha"
             variant="outlined"
             type="password"
             size="small"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Box
@@ -239,7 +248,7 @@ const Login = () => {
           <Button
             className="entrar"
             variant="contained"
-            onClick={(e) => handlerLogin(e)}
+            type="submit"
             sx={{
               boxShadow: "none",
               width: "100px",
@@ -272,7 +281,6 @@ const Login = () => {
             sx={{ color: "white", borderColor: "white" }}
           />
           <TextField
-
             className="input"
             name="email"
             label="E-mail"
@@ -281,7 +289,6 @@ const Login = () => {
             size="small"
           />
           <TextField
-
             className="input"
             label="Senha"
             variant="outlined"

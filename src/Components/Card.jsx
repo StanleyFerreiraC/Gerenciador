@@ -1,20 +1,22 @@
 import React from "react";
+import "../App.css";
 
 const Card = () => {
   return (
     <div
+    className="cards"
       style={{
         height: "100%",
-        minWidth: "180%",
+        minWidth: "25%",
         borderRadius: "20px",
-        backgroundColor: "#adadade8",
+        backgroundColor: "#b91814",
         display: "flex",
         alignItems: "center",
       }}
     >
       <div
         style={{
-          minWidth: "85%",
+          minWidth: "80%",
         }}
       >
         <p

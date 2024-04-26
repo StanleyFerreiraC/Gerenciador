@@ -1,12 +1,17 @@
 import React from "react";
 
-const CreateCard = ({toggleVisibility}) => {
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { styled } from "@mui/material/styles";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+
+const CreateCard = ({ toggleVisibility }) => {
   return (
-    <div
+    <Box
       style={{
         height: "100%",
         width: "100%",
-        backgroundColor: "#0707077a",
         position: "absolute",
         display: "flex",
         alignItems: "center",
@@ -17,13 +22,13 @@ const CreateCard = ({toggleVisibility}) => {
       }}
     >
       {/* Campo do formulario */}
-      <div
-        style={{
+      <Box
+        sx={{
           height: "60%",
           minWidth: "25%",
           padding: "0px 20px",
           borderRadius: "10px",
-          backgroundColor: "rgba(111, 111, 111, 0.4)",
+          backgroundColor: "#b91814",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -32,8 +37,8 @@ const CreateCard = ({toggleVisibility}) => {
         }}
       >
         {/* Drop de imagem */}
-        <div
-          style={{
+        <Box
+          sx={{
             height: "45%",
             width: "100%",
             backgroundColor: "#c5bdbd4d",
@@ -41,6 +46,7 @@ const CreateCard = ({toggleVisibility}) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            border: "solid 1px",
           }}
         >
           <span
@@ -51,56 +57,60 @@ const CreateCard = ({toggleVisibility}) => {
           >
             place_item
           </span>
-        </div>
+        </Box>
         {/*Inputs*/}
 
-        <input
-          style={{
+        <TextField
+          variant="outlined"
+          name="projectname"
+          size="small"
+          type="text"
+          label="Nome do projeto"
+          sx={{
             marginTop: "30px",
-            width: "95%",
+            width: "100%",
             borderRadius: "10px",
           }}
-          name="projectname"
-          type="text"
-          placeholder="Project name"
         />
-        <div
-          style={{
+
+        <Box
+          sx={{
             width: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "row",
+            marginTop: "15px",
           }}
         >
-          <input
-            style={{
+          <TextField
+            sx={{
               borderRadius: "10px",
               marginRight: "5px",
               width: "50%",
               color: "#1f1e1ebb;",
             }}
             name="data de inicio"
+            size="small"
             type="date"
-            placeholder="Start Date"
           />
-          <input
-            style={{
+          <TextField
+            sx={{
               borderRadius: "10px",
               width: "50%",
               color: "#1f1e1ebb;",
             }}
+            size="small"
             name="data de Finalização"
             type="date"
-            placeholder="Completion date"
           />
-        </div>
-        <div>
+        </Box>
+        <Box>
           <button>Save</button>
           <button onClick={toggleVisibility}>Cancel</button>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

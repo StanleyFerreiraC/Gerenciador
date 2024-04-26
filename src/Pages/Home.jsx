@@ -30,7 +30,7 @@ const Home = () => {
               height: "40px",
               width: "40px",
               borderRadius: "20px",
-              backgroundColor: "#adadade8",
+              backgroundColor: "#b91814",
               marginTop: "15px",
             }}
             onClick={toggleVisibility}

@@ -34,7 +34,6 @@ input {
   color: #000000;
 }
 
-
 input:focus {
   outline: none; /* Remover a borda padrão do navegador */
 }
@@ -70,18 +69,21 @@ button {
   border: none;
   padding: 0.8em 1.5em;
   margin: 1.6em 1.2em;
+  color: #000000;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #c5bdbd4d;
+  background-color: aliceblue;
   box-shadow: 0px 0px 5px 1px rgba(30, 29, 29, 0.295);
   cursor: pointer;
 }
 button:hover {
-  transition: background-color 0.20s, scale 0.20s;
-  background-color: #bf2946;
+  transition: background-color 0.2s, scale 0.2s;
+  background-color: #cb4204;
   color: #1a1a1a;
-  scale: 1.05;
+  scale: 1.02;
+  border: solid 1px;
+  border-color: aliceblue;
 }
 
 .material-symbols-outlined {
@@ -101,5 +103,11 @@ button:hover {
   }
   body {
     background-image: url(./assets/background.svg);
+  }
+}
+
+@media (max-width: 500px) {
+  .cards {
+    min-width: 100% !important;
   }
 }
