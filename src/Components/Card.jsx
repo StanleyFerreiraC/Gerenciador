@@ -1,11 +1,15 @@
 import React from "react";
 import "../App.css";
+import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
+import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
-const Card = () => {
+const Card = ({getCards}) => {
   return (
-    <div
-    className="cards"
-      style={{
+    <Container
+      className="cards"
+      sx={{
         height: "100%",
         minWidth: "25%",
         borderRadius: "20px",
@@ -14,8 +18,8 @@ const Card = () => {
         alignItems: "center",
       }}
     >
-      <div
-        style={{
+      <Box
+        sx={{
           minWidth: "80%",
         }}
       >
@@ -28,10 +32,10 @@ const Card = () => {
         >
           PROJETO
         </p>
-      </div>
-      <span className="material-symbols-outlined">more_vert</span>
-      <span className="material-symbols-outlined">archive</span>
-    </div>
+      </Box>
+      <MoreVertOutlinedIcon onClick={getCards} className="icons" />
+      <ArchiveOutlinedIcon className="icons" />
+    </Container>
   );
 };
 

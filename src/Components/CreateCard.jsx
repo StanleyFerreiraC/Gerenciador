@@ -1,12 +1,21 @@
 import React from "react";
 
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
-const CreateCard = ({ toggleVisibility }) => {
+const CreateCard = ({
+  toggleVisibility,
+  setProjectname,
+  setInitdate,
+  setEnddate,
+  handlerCreateCard,
+  error,
+}) => {
   return (
     <Box
       style={{
@@ -36,6 +45,7 @@ const CreateCard = ({ toggleVisibility }) => {
           boxShadow: "0px 0px 5px 1px rgba(30 29 29)",
         }}
       >
+        <strong className="erro">{error}</strong>
         {/* Drop de imagem */}
         <Box
           sx={{
@@ -49,65 +59,103 @@ const CreateCard = ({ toggleVisibility }) => {
             border: "solid 1px",
           }}
         >
-          <span
+          <FileDownloadOutlinedIcon
             style={{
-              scale: "1.2",
+              scale: "1.3",
             }}
-            class="material-symbols-outlined"
-          >
-            place_item
-          </span>
+          />
         </Box>
         {/*Inputs*/}
-
-        <TextField
-          variant="outlined"
-          name="projectname"
-          size="small"
-          type="text"
-          label="Nome do projeto"
-          sx={{
-            marginTop: "30px",
-            width: "100%",
-            borderRadius: "10px",
-          }}
-        />
-
         <Box
           sx={{
             width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
-            marginTop: "15px",
           }}
         >
           <TextField
-            sx={{
-              borderRadius: "10px",
-              marginRight: "5px",
-              width: "50%",
-              color: "#1f1e1ebb;",
-            }}
-            name="data de inicio"
+            variant="outlined"
+            name="projectname"
             size="small"
-            type="date"
-          />
-          <TextField
+            type="text"
+            label="Nome do projeto"
+            onChange={(e) => setProjectname(e.target.value)}
             sx={{
+              marginTop: "30px",
+              width: "100%",
               borderRadius: "10px",
-              width: "50%",
-              color: "#1f1e1ebb;",
             }}
-            size="small"
-            name="data de Finalização"
-            type="date"
           />
-        </Box>
-        <Box>
-          <button>Save</button>
-          <button onClick={toggleVisibility}>Cancel</button>
+
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "row",
+              marginTop: "15px",
+            }}
+          >
+            <TextField
+              name="initdate"
+              onChange={(e) => setInitdate(e.target.value)}
+              sx={{
+                borderRadius: "10px",
+                marginRight: "5px",
+                width: "50%",
+                color: "#1f1e1ebb;",
+              }}
+              size="small"
+              type="date"
+            />
+            <TextField
+              sx={{
+                borderRadius: "10px",
+                width: "50%",
+                color: "#1f1e1ebb;",
+              }}
+              onChange={(e) => setEnddate(e.target.value)}
+              size="small"
+              name="enddate"
+              type="date"
+            />
+          </Box>
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              marginTop: "10px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Grid item>
+              <Button
+                className="entrar"
+                onClick={handlerCreateCard}
+                sx={{
+                  width: "100px",
+                  backgroundColor: "#fefefe",
+                  color: "#cb4204",
+                }}
+              >
+                Save
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                className="entrar"
+                onClick={toggleVisibility}
+                sx={{
+                  width: "100px",
+                  backgroundColor: "#fefefe",
+                  color: "#cb4204",
+                }}
+              >
+                Cancel
+              </Button>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Box>
