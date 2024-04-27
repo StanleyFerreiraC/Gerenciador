@@ -24,20 +24,26 @@ const Login = () => {
     setPosicao(49.9); // Mover a div 100px para a direita
     setDisplaySing("flex");
     setDisplayLogin("none");
-    setError(null);
+    setError("");
+    setEmail("");
+    setUsername("");
+    setPassword("");
   };
 
   const moverDivRight = () => {
     setPosicao(36.5); // Mover a div 100px para a direita
     setDisplaySing("none");
     setDisplayLogin("flex");
-    setError(null);
+    setError("");
+    setEmail("");
+    setUsername("");
+    setPassword("");
   };
 
   //Função de autenticação Login
   const handlerLogin = async (e) => {
     e.preventDefault();
-    console.log(email, password);
+    console.log("login");
 
     //Se o campo estiver vazio mostre a mensagem
     if (!email.trim() || !password.trim()) {
@@ -67,17 +73,17 @@ const Login = () => {
 
   const handlerCadastro = async (e) => {
     e.preventDefault();
-    console.log(email, password);
+    console.log("Cadastro");
 
     //Se o campo estiver vazio mostre a mensagem
-    if (!email.trim() || !password.trim()) {
+    if (!username.trim() || !email.trim() || !password.trim()) {
       setError("Preencha todos os campos");
       return;
     }
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/Cadastro",
+        "http://localhost:3000/cadastro",
         JSON.stringify({ username, email, password }),
         {
           headers: { "Content-Type": "application/json" },
@@ -85,11 +91,13 @@ const Login = () => {
       );
       if (response.status === 200) {
         moverDivRight();
+        setError("Confirme seu cadastro");
       }
     } catch (error) {
       if (!error?.response) {
-        moverDivRight();
         setError("Erro ao acessar o servidor");
+      } else if (error.response.status == 422) {
+        setError("E-mail já cadastrado");
       }
     }
   };
@@ -263,6 +271,7 @@ const Login = () => {
         {/******Cadastro de usuarios******/}
         <Box
           component="form"
+          onSubmit={handlerCadastro}
           className="cadastro visibility"
           sx={{
             "& > :not(style)": { m: 1 },
@@ -278,7 +287,7 @@ const Login = () => {
             variant="outlined"
             type="text"
             size="small"
-            sx={{ color: "white", borderColor: "white" }}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             className="input"
@@ -287,6 +296,7 @@ const Login = () => {
             variant="outlined"
             type="email"
             size="small"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             className="input"
@@ -294,11 +304,12 @@ const Login = () => {
             variant="outlined"
             type="password"
             size="small"
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             className="entrar"
             variant="contained"
-            onClick={(e) => handlerCadastro(e)}
+            type="submit"
             sx={{
               boxShadow: "none",
               width: "100px",

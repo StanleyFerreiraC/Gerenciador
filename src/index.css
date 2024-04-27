@@ -23,7 +23,6 @@ a:hover {
 }
 
 input {
-  background-color: #d9d9d9;
   border: none;
   height: 40px;
   margin-bottom: 20px;
@@ -31,7 +30,7 @@ input {
   padding-left: 10px;
   padding-right: 10px;
   font-weight: bold;
-  color: #000000;
+  color: #ffffff !important;
 }
 
 input:focus {
@@ -81,8 +80,6 @@ button:hover {
   transition: background-color 0.2s, scale 0.2s;
   background-color: #cb4204;
   color: #1a1a1a;
-  scale: 1.02;
-  border: solid 1px;
   border-color: aliceblue;
 }
 
