@@ -1,104 +1,66 @@
+import logo from "./logo.svg";
+import "./App.css";
+import { useState } from "react";
+import { DragDropContext } from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 
+const inicialItems = [
+  { id: "1", content: "Conteúdo 1" },
+  { id: "2", content: "Conteúdo 2" },
+  { id: "3", content: "Conteúdo 3" },
+];
 
-const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+const inicialColumns = [
+  {
+    name: "To do",
+    id: "123",
+    items: inicialItems,
+  },
+];
 
-  const handlerLogin = async (e) => {
-    e.preventDefault();
-    console.log(username, password);
-
-    //Se o campo estiver vazio mostre a mensagem
-    if (!username.trim() || !password.trim()) {
-      setError("Please fill in all fields");
-      return;
-    }
-
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/login",
-        JSON.stringify({ username, password }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      if (response.status === 200) {
-        navigate("/home");
-      }
-    } catch (error) {
-      if (!error?.response) {
-        setError("Error accessing the server");
-      } else if (error.response.status == 401) {
-        setError("Incorrect username or password");
-      }
-    }
-  };
+function App() {
+  const [columns, setColumns] = useState(inicialColumns);
 
   return (
-    <div
-      style={{
-        width: "310px",
-        backgroundColor: "rgba(111, 111, 111, 0.4)",
-        borderRadius: "20px",
-        backdropFilter: "blur(10px)",
-        boxShadow: "0px 0px 5px 1px #0202028a",
-      }}
-    >
-      <img
-        style={{
-          width: "6em",
-          padding: "30px",
-        }}
-        src={logo}
-      ></img>
-      <form
-        onSubmit={handlerLogin}
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <p
-          style={{
-            color: "red",
-            margin: "0px 0px 10px 0px",
-          }}
-        >
-          {error}
-        </p>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "80%",
-            textAlign: "left",
-          }}
-        >
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          ></input>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-        </div>
-
-        <h3 className="forgot">Forgot your password ?</h3>
-        <button type="submit">Login</button>
-      </form>
+    <div className="App">
+      <DragDropContext>
+        {inicialColumns.map((column) => (
+          <Droppable droppableId={column.id}>
+            {(provided) => (
+              <div
+                ref={provided.innerRef}
+                style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+              >
+                <h1>{column.name}</h1>
+                <div style={{ backgroundColor: "lightblue", width: 250, height: 500, padding: 10 }}>
+                  {column.items.map((item, index) => (
+                    <Draggable draggableId={item.id} index={index}>
+                      {(provided) => (
+                        <div
+                          {...provided.dragHandleProps}
+                          {...provided.draggableProps}
+                          ref={provided.innerRef}
+                          style={{
+                            backgroundColor: "gray",
+                            height: 40,
+                            marginBottom: 10,
+                            ...provided.draggableProps.style,
+                          }}
+                        >
+                          {item.content}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                </div>
+              </div>
+            )}
+          </Droppable>
+        ))}
+      </DragDropContext>
     </div>
   );
-};
+}
 
-export default Login;
+export default App;

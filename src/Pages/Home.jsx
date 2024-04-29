@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Add from "../assets/add.svg";
 import "../App.css";
 import Card from "../Components/Card";
@@ -13,38 +13,44 @@ const Home = () => {
   const [projectname, setProjectname] = useState("");
   const [initdate, setInitdate] = useState("");
   const [enddate, setEnddate] = useState("");
+  const [cards, setCards] = useState([]);
   const [error, setError] = useState("");
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
 
-  const getCards = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/getCard",
-        JSON.stringify({ projectname, initdate, enddate }),
-        {
-          headers: { "Content-Type": "application/json" },
+  //Função para pegar as informações dos cards existentes
+  useEffect(() => {
+    const getCards = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/getCard",
+          JSON.stringify({ projectname, initdate, enddate }),
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        if (response.status === 200) {
+          const nameCards = response.data.map((card) => card.projectname);
+          setCards(nameCards);
         }
-      );
-      if (response.status === 200) {
-        console.log(response);
+      } catch (error) {
+        if (!error?.response) {
+          setError("Erro ao enviar para o servidor");
+        }
       }
-    } catch (error) {
-      if (!error?.response) {
-        setError("Erro ao enviar para o servidor");
-      }
-    }
-  };
+    };
 
+    getCards();
+  }, []);
+
+  //Função para criar novos cards
   const handlerCreateCard = async (e) => {
     e.preventDefault();
     console.log(projectname, initdate, enddate);
 
-    //Se o campo estiver vazio mostre a mensagem
+    //Se o campo estiver vazio mostre a menssagem
     if (!projectname.trim() || !initdate.trim() || !enddate.trim()) {
       setError("Preencha todos os campos");
       console.log(error);
@@ -62,7 +68,7 @@ const Home = () => {
       if (response.status === 200) {
         setIsVisible(!isVisible);
         setError("");
-        getCards;
+        window.location.reload();
       }
     } catch (error) {
       if (!error?.response) {
@@ -70,6 +76,28 @@ const Home = () => {
       }
     }
   };
+
+  const apagarcard = async (cards) => {
+    const respostaConfirm = window.confirm(
+      "Você quer realmente deletar esse projeto ?"
+    );
+    if (respostaConfirm) {
+      try {
+        await axios.delete(`http://localhost:3000/deleteCard/`, {
+          data: { cards },
+        });
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const currentDate = new Date().toISOString().split("T")[0];
+
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() + 50);
+  const maxDateString = maxDate.toISOString().split("T")[0];
 
   return (
     <Container maxWidth="sm">
@@ -81,9 +109,13 @@ const Home = () => {
             alignItems: "center",
             fontWeight: "bold",
             height: "100%",
+            cursor: "pointer",
           }}
         >
-          <Card  getCards={getCards}/>
+          {cards.length > 0 &&
+            cards.map((cards, index) => (
+              <Card key={index} cards={cards} apagarcard={apagarcard} />
+            ))}
           <Box
             className="add"
             style={{
@@ -113,6 +145,8 @@ const Home = () => {
           setEnddate={setEnddate}
           handlerCreateCard={handlerCreateCard}
           toggleVisibility={toggleVisibility}
+          currentDate={currentDate}
+          maxDateString={maxDateString}
         />
       )}
     </Container>

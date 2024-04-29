@@ -3,8 +3,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import { styled } from "@mui/material/styles";
-import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
@@ -15,6 +13,8 @@ const CreateCard = ({
   setEnddate,
   handlerCreateCard,
   error,
+  currentDate,
+  maxDateString,
 }) => {
   return (
     <Box
@@ -97,6 +97,13 @@ const CreateCard = ({
           >
             <TextField
               name="initdate"
+              size="small"
+              type="date"
+              id="dateInput"
+              inputProps={{
+                min: currentDate, // Define a data mínima como a data atual
+                max: maxDateString, // Define a data máxima como 2070
+              }}
               onChange={(e) => setInitdate(e.target.value)}
               sx={{
                 borderRadius: "10px",
@@ -104,14 +111,16 @@ const CreateCard = ({
                 width: "50%",
                 color: "#1f1e1ebb;",
               }}
-              size="small"
-              type="date"
             />
             <TextField
               sx={{
                 borderRadius: "10px",
                 width: "50%",
                 color: "#1f1e1ebb;",
+              }}
+              inputProps={{
+                min: currentDate, // Define a data mínima como a data atual
+                max: maxDateString, // Define a data máxima como 2070
               }}
               onChange={(e) => setEnddate(e.target.value)}
               size="small"
