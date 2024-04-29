@@ -83,7 +83,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/cadastro",
+        "https://backend-projeto-trello.onrender.com/cadastro",
         JSON.stringify({ username, email, password }),
         {
           headers: { "Content-Type": "application/json" },
