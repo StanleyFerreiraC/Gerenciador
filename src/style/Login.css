@@ -1,7 +1,11 @@
 @keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+  0% {
+    opacity: 0;
   }
+  100% {
+    opacity: 1;
+  }
+}
 
 .a {
   color: rgb(255, 255, 255);
@@ -16,9 +20,9 @@
   background-image: url("../assets/img/Background02.jpg");
   background-size: cover;
 }
-.todo{
-background-color: #ffffff;
-height: 100vh;
+.todo {
+  background-color: #ffffff;
+  height: 100vh;
 }
 
 fieldset {
@@ -39,19 +43,17 @@ label {
   color: aliceblue !important;
 }
 
-
-.login, .cadastro {
-    animation-name: fadeIn;
-    animation-duration: 2s;
-    animation-delay: 0ms;
-    animation-fill-mode: forwards;
+.login,
+.cadastro {
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-delay: 0ms;
+  animation-fill-mode: forwards;
 }
 
 .visibility {
-    opacity: 0;
+  opacity: 0;
 }
-
-
 
 @media (prefers-color-scheme: light) {
   button {
@@ -62,5 +64,16 @@ label {
   button:hover {
     background-color: #ffffff !important;
     color: rgb(0, 0, 0) !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .cardlogin {
+    height: 40% !important;
+    right: 15% !important;
+    top: 25% !important;
+  }
+  .cardbacklogin {
+    display: none !important;
   }
 }

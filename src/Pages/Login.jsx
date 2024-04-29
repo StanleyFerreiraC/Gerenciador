@@ -115,6 +115,7 @@ const Login = () => {
     >
       <Box
         gap={1}
+        className="cardbacklogin"
         sx={{
           display: "flex",
           width: "60%",
@@ -188,6 +189,7 @@ const Login = () => {
       </Box>
       <Box></Box>
       <Box
+      className="cardlogin"
         sx={{
           zIndex: "10",
           position: "absolute",
