@@ -3,20 +3,18 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import "../App.css";
 
 const Projeto = () => {
   const [columns, setColumns] = useState({
     "column-1": {
       id: "column-1",
-      title: "Tarefas",
+      title: "A fazer",
       items: [
         "Item 1",
         "Item 2",
         "Item 3",
         "Item 4",
-        "Item 5",
-        "Item 7",
-        "Item 8",
       ],
     },
     "column-2": {
@@ -26,7 +24,7 @@ const Projeto = () => {
     },
     "column-3": {
       id: "column-3",
-      title: "Finalizadas",
+      title: "Concluido",
       items: [],
     },
   });
@@ -89,6 +87,7 @@ const Projeto = () => {
     <Container>
       <DragDropContext onDragEnd={handleDragEnd}>
         <Box
+        className="collumns"
           style={{
             color: "black",
             borderRadius: 10,
@@ -101,6 +100,7 @@ const Projeto = () => {
             <Droppable key={column} droppableId={column.id}>
               {(provided) => (
                 <Box
+                className="collumnscard"
                   style={{
                     color: "black",
                     backgroundColor: "#b91814",

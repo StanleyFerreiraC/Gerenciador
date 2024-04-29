@@ -11,6 +11,7 @@ import Container from "@mui/material/Container";
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [projectname, setProjectname] = useState("");
+
   const [initdate, setInitdate] = useState("");
   const [enddate, setEnddate] = useState("");
   const [cards, setCards] = useState([]);
@@ -25,7 +26,7 @@ const Home = () => {
     const getCards = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/getCard",
+          "https://backend-projeto-trello.onrender.com/getCard",
           JSON.stringify({ projectname, initdate, enddate }),
           {
             headers: { "Content-Type": "application/json" },
@@ -59,7 +60,7 @@ const Home = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/cardCreate",
+        "https://backend-projeto-trello.onrender.com/cardCreate",
         JSON.stringify({ projectname, initdate, enddate }),
         {
           headers: { "Content-Type": "application/json" },
@@ -83,7 +84,7 @@ const Home = () => {
     );
     if (respostaConfirm) {
       try {
-        await axios.delete(`http://localhost:3000/deleteCard/`, {
+        await axios.delete(`https://backend-projeto-trello.onrender.com/deleteCard/`, {
           data: { cards },
         });
         window.location.reload();
@@ -98,6 +99,13 @@ const Home = () => {
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 50);
   const maxDateString = maxDate.toISOString().split("T")[0];
+
+  const diferencaEmMilissegundos = initdate - enddate;
+  const diferencaEmDias = Math.floor(
+    diferencaEmMilissegundos / (1000 * 60 * 60 * 24)
+  );
+
+  console.log(diferencaEmDias);
 
   return (
     <Container maxWidth="sm">
