@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import "../App.css";
+import Workspace from "../Components/Workspace";
 
 const Projeto = () => {
   const [columns, setColumns] = useState({
@@ -85,6 +86,7 @@ const Projeto = () => {
 
   return (
     <Container>
+      <Workspace ArrowBackIosIcon={ArrowBackIosIcon}/>
       <DragDropContext onDragEnd={handleDragEnd}>
         <Box
         className="collumns"
