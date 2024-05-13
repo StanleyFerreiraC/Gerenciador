@@ -86,7 +86,7 @@ const Projeto = () => {
 
   return (
     <Container>
-      <Workspace ArrowBackIosIcon={ArrowBackIosIcon}/>
+      <Workspace />
       <DragDropContext onDragEnd={handleDragEnd}>
         <Box
         className="collumns"

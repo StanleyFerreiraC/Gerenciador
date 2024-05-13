@@ -4,7 +4,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 const Workspace = () => {
   return (
     <div>
-      <div>{ArrowBackIosIcon}</div>
+      <ArrowBackIosIcon/>
     </div>
   );
 };
